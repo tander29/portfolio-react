@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Typography } from "@material-ui/core";
 import ProjectCard from "./ProjectCard";
-const projectTypes = ["javascript", "react.js", "python", "django", "go"];
+import ProjectsList from "../Projects/ProjectsInfo";
 
-const projectSelection = (projectTypes: Array<string>) => {
-  return projectTypes.map((type: string) => <Button>{type}</Button>);
-};
+// const projectTypes = ["javascript", "react.js", "python", "django", "go"];
+const projectTypes = Object.keys(ProjectsList);
 
 const ProjectContainer = () => {
+  const [projTitle, setProjTitle] = useState<string>("JavaScript");
+
+  const ProjectSelection = (projectTypes: Array<string>) => {
+    return projectTypes.map((type: string, index: number) => (
+      <Button key={index} onClick={() => setProjTitle(type)}>
+        {type}
+      </Button>
+    ));
+  };
+
+  const Projects = () => {
+    return ProjectsList[projTitle].map((project, _) => (
+      <ProjectCard key={_} {...project} />
+    ));
+  };
+
   return (
     <React.Fragment>
-      <Typography>Currently Viewing JS projects</Typography>
-      <aside>{projectSelection(projectTypes)}</aside>
-      <ProjectCard />
+      <Typography>Currently Viewing {projTitle}</Typography>
+      <aside>{ProjectSelection(projectTypes)}</aside>
+      {Projects()}
     </React.Fragment>
   );
 };

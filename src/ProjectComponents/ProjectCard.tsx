@@ -8,10 +8,10 @@ import {
   ClickAwayListener,
   ButtonGroup
 } from "@material-ui/core";
+import { ProjectI } from "../Projects/ProjectsInfo";
 
-const ProjectCard = () => {
+const ProjectCard = (project: ProjectI) => {
   const [showMore, setShowMore] = useState<boolean>(false);
-
   const toggleShowMore = () => setShowMore(!showMore);
 
   return (
@@ -20,13 +20,14 @@ const ProjectCard = () => {
         style={{
           minWidth: "100px",
           maxWidth: "200px",
-          overflow: "auto"
+          overflow: "auto",
+          marginTop: "1em"
         }}
       >
         <CardContent>
-          <Typography variant="subtitle2">JS Maze</Typography>
+          <Typography variant="subtitle2">{project.title}</Typography>
           <Typography variant="caption" component="div">
-            Description this is a thing that blah blahblahblahblah
+            {project.description}
           </Typography>
           <ButtonGroup
             style={{ margin: "auto", marginBottom: "0" }}
@@ -34,18 +35,27 @@ const ProjectCard = () => {
             variant="text"
             color="primary"
           >
-            <Button size="small">Repo</Button>
-            <Button href="https://tander29.github.io/checkers">Deployed</Button>
+            <Button style={{ fontSize: ".6em" }}>Repo</Button>
+
+            <Button
+              // rel="noreferrer"
+              href={project.deployUrl}
+              // target="_blank"
+              style={{ fontSize: ".6em" }}
+            >
+              Deployed
+            </Button>
           </ButtonGroup>
+
           <ClickAwayListener onClickAway={() => setShowMore(false)}>
-            <div>
+            <span>
               <Button size="small" onClick={toggleShowMore}>
                 More
               </Button>
               <Collapse in={showMore}>
-                <Typography>Hello</Typography>
+                <Typography>{project.description}</Typography>
               </Collapse>
-            </div>
+            </span>
           </ClickAwayListener>
         </CardContent>
       </Card>

@@ -15,51 +15,64 @@ const ProjectCard = (project: ProjectI) => {
   const toggleShowMore = () => setShowMore(!showMore);
 
   return (
-    <React.Fragment>
-      <Card
-        style={{
-          minWidth: "100px",
-          maxWidth: "200px",
-          overflow: "auto",
-          marginTop: "1em"
-        }}
-      >
-        <CardContent>
-          <Typography variant="subtitle2">{project.title}</Typography>
+    // <Zoom in={true} style={{ transitionDelay: "200ms" }}>
+    <Card
+      style={{
+        minWidth: "100px",
+        maxWidth: "200px",
+        overflow: "auto",
+        margin: ".75em"
+      }}
+    >
+      <CardContent>
+        <Typography variant="subtitle2">{project.title}</Typography>
+        <Typography
+          style={{
+            textOverflow: "ellipsis",
+            maxHeight: "40px",
+            overflow: "hidden"
+          }}
+          variant="caption"
+          component="div"
+        >
+          {!showMore ? project.description.slice(0, 40) + "..." : ""}
+        </Typography>
+        <Collapse in={showMore}>
           <Typography variant="caption" component="div">
-            {project.description}
+            {showMore ? project.description : ""}
           </Typography>
-          <ButtonGroup
-            style={{ margin: "auto", marginBottom: "0" }}
-            size="small"
-            variant="text"
-            color="primary"
-          >
-            <Button style={{ fontSize: ".6em" }}>Repo</Button>
+        </Collapse>
 
-            <Button
-              // rel="noreferrer"
-              href={project.deployUrl}
-              // target="_blank"
-              style={{ fontSize: ".6em" }}
-            >
+        <ButtonGroup
+          style={{ margin: "auto", marginBottom: "0" }}
+          size="small"
+          variant="text"
+          color="primary"
+        >
+          <Button
+            href={project.repoUrl}
+            target="blank"
+            style={{ fontSize: ".6em" }}
+          >
+            Repo
+          </Button>
+
+          {project.deployUrl ? (
+            <Button href={project.deployUrl} style={{ fontSize: ".6em" }}>
               Deployed
             </Button>
-          </ButtonGroup>
-
-          <ClickAwayListener onClickAway={() => setShowMore(false)}>
-            <span>
-              <Button size="small" onClick={toggleShowMore}>
-                More
-              </Button>
-              <Collapse in={showMore}>
-                <Typography>{project.description}</Typography>
-              </Collapse>
-            </span>
-          </ClickAwayListener>
-        </CardContent>
-      </Card>
-    </React.Fragment>
+          ) : null}
+        </ButtonGroup>
+        <ClickAwayListener onClickAway={() => setShowMore(false)}>
+          <span>
+            <Button size="small" onClick={toggleShowMore}>
+              {!showMore ? "More" : "Hide"}
+            </Button>
+          </span>
+        </ClickAwayListener>
+      </CardContent>
+    </Card>
+    // </Zoom>
   );
 };
 

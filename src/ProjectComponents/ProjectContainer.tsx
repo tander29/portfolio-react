@@ -37,7 +37,7 @@ const ProjectContainer = () => {
                 marginBottom: "1em",
                 border: isSelected ? "1px solid white" : undefined,
                 color: isSelected ? "white" : undefined,
-                backgroundColor: isSelected ? "RGBa(21, 97, 21, .4)" : undefined
+                backgroundColor: isSelected ? "RGBa(21, 97, 21, .6)" : undefined
               }}
               disabled={isSelected}
             >
@@ -73,11 +73,21 @@ const ProjectContainer = () => {
 
   return (
     <React.Fragment>
-      <aside>{ProjectSelection(projectTypes)}</aside>
-      <Typography>
-        Displaying ({ProjectsList[projTitle].length}) {projTitle} Projects
-      </Typography>
-      <div>{Projects()}</div>
+      <div
+        style={{
+          marginTop: "1em",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
+        }}
+      >
+        <h1 id="projects">PROJECTS</h1>
+        <aside>{ProjectSelection(projectTypes)}</aside>
+        <Typography>
+          Displaying ({ProjectsList[projTitle].length}) {projTitle} Projects
+        </Typography>
+        <div>{Projects()}</div>
+      </div>
     </React.Fragment>
   );
 };

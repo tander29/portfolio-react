@@ -85,7 +85,7 @@ const ProjectLists: ProjectListsI = {
       title: "Book Buddy Back End",
       repoUrl: "https://github.com/tander29/bookbuddy-api",
       description:
-        "Back end for Book body website, uses Node.JS, Postgres, and hosted on heroku"
+        "Back end for BookBudddy website, uses Node.JS, Postgres, and hosted on heroku, auth token creation"
     }
   ]
 };

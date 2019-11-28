@@ -7,6 +7,7 @@ import {
   Typography,
   ClickAwayListener,
   ButtonGroup
+  // Slide
 } from "@material-ui/core";
 import { ProjectI } from "../Projects/ProjectsInfo";
 
@@ -15,7 +16,7 @@ const ProjectCard = (project: ProjectI) => {
   const toggleShowMore = () => setShowMore(!showMore);
 
   return (
-    // <Zoom in={true} style={{ transitionDelay: "200ms" }}>
+    // <Slide in={true} direction="up" style={{ transitionDelay: "200ms" }}>
     <Card
       style={{
         minWidth: "100px",
@@ -35,6 +36,7 @@ const ProjectCard = (project: ProjectI) => {
           variant="caption"
           component="div"
         >
+          {project.description.length < 40 ? project.description : ""}
           {!showMore ? project.description.slice(0, 40) + "..." : ""}
         </Typography>
         <Collapse in={showMore}>
@@ -72,7 +74,7 @@ const ProjectCard = (project: ProjectI) => {
         </ClickAwayListener>
       </CardContent>
     </Card>
-    // </Zoom>
+    // </Slide>
   );
 };
 
